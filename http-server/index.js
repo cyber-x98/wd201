@@ -1,5 +1,8 @@
 const http = require("http");
 const fs = require("fs");
+const minimist = require("minimist");
+
+let commandLineArgs = minimist(process.argv.slice(2));
 
 let homeContent = "";
 let projectContent = "";
@@ -38,10 +41,11 @@ http
       case "/registration":
         response.write(registrationContent);
         response.end();
+        break;
       default:
         response.write(homeContent);
         response.end();
         break;
     }
   })
-  .listen(3000);
+  .listen(commandLineArgs.port);
